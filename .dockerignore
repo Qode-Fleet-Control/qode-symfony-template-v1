@@ -1,0 +1,11 @@
+.git
+.github
+.fleet
+.fleet-deploy.log
+vendor
+var
+public/bundles
+.env.local
+.env.local.php
+.env.*.local
+*.log
