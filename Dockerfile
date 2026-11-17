@@ -17,6 +17,11 @@ RUN composer dump-autoload --classmap-authoritative --no-dev --no-interaction \
  && useradd -r -u 10001 -d /app app \
  && mkdir -p var && chown -R app:app var /config/caddy /data/caddy \
  && chmod +x docker/entrypoint.sh
+# KEEP THIS: one log line per request (status + duration) is what the workspace Monitoring tab charts.
+# docker/request-log.caddyfile turns on Caddy's JSON access log on stdout; the stock Caddyfile
+# imports it into its site block through CADDY_SERVER_EXTRA_DIRECTIVES.
+COPY docker/request-log.caddyfile /etc/frankenphp/request-log.caddyfile
+ENV CADDY_SERVER_EXTRA_DIRECTIVES="import /etc/frankenphp/request-log.caddyfile"
 ARG BUILD_ID=""
 ENV PORT=8000 SERVER_ROOT=/app/public BUILD_ID=$BUILD_ID
 USER app
