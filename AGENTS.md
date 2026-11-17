@@ -60,6 +60,7 @@ Three specifics worth spelling out, because they are easy to get wrong:
   can't extend a `readonly` class.
 - Use `symfony/lock` (`LockFactory`) for mutual exclusion. A hand-built flag or
   lock file looks fine in review and is usually wrong under concurrency.
+- Keep the request logger: every HTTP request must log one JSON line with status and duration (Monitoring tab).
 
 ## Everyday workflow
 
